@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body onload="#{conteudoBean.carregarLista()}">
+	<h:form id="form">
+		<p:growl showDetail="true"></p:growl>
+		
+		<p:commandButton value="Incluir Conteudo"
+			action="#{conteudoBean.incluir()}" icon="ui-icon-plus"
+			ajax="false">
+		</p:commandButton>
+
+		<p:commandButton id="alterar" value="Alterar Conteudo"
+			action="#{conteudoBean.alterar()}"
+			disabled="#{conteudoBean.obj==null}" icon="ui-icon-pencil"
+			ajax="false">
+		</p:commandButton>
+
+		<p:commandButton id="excluir" value="Excluir Conteudo"
+			action="#{conteudoBean.excluir()}" icon="ui-icon-trash"
+			ajax="false" disabled="#{conteudoBean.obj==null}"
+			onclick="return confirm('Confirma exclusão?');">
+		</p:commandButton>
+
+		<p:dataTable value="#{conteudoBean.lista}" var="p"
+			selectionMode="single" selection="#{conteudoBean.obj}"
+			rowKey="#{p.id}" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15"
+			emptyMessage="Nenhum objeto encontrado!"
+			currentPageReportTemplate="Listando de {startRecord} até {endRecord} de {totalRecords}">
+			<p:ajax event="rowSelect" update=":form:excluir :form:alterar" />
+			<p:column headerText="Código" sortBy="#{p.id}" filterBy="#{p.id}"
+				filterMatchMode="exact">
+				<h:outputText value="#{p.id}"></h:outputText>
+			</p:column>
+			
+			<p:column headerText="Titulo" sortBy="#{p.titulo}" filterBy="#{p.titulo}"
+				filterMatchMode="contains">
+				<h:outputText value="#{p.titulo}"></h:outputText>
+			</p:column>
+			
+			<p:column headerText="Texto" sortBy="#{p.texto}" filterBy="#{p.texto}"
+				filterMatchMode="contains">
+				<h:outputText value="#{p.texto}"></h:outputText>
+			</p:column>
+			
+			<p:column headerText="Categoria" sortBy="#{p.categoria.descricao}" filterBy="#{p.categoria.descricao}"
+				filterMatchMode="contains">
+				<h:outputText value="#{p.categoria.descricao}"></h:outputText>
+			</p:column>
+			
+			<p:column headerText="Disciplina" sortBy="#{p.disciplina.descricao}" filterBy="#{p.disciplina.descricao}"
+				filterMatchMode="contains">
+				<h:outputText value="#{p.disciplina.descricao}"></h:outputText>
+			</p:column>
+			
+				
+
+		</p:dataTable>
+
+
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<h:form id="formEditar">
+		<p:growl></p:growl>
+		<p:panelGrid columns="2">
+
+			<p:outputLabel value="Id"></p:outputLabel>
+			<p:inputText placeholder="Informe ID" 
+				value="#{conteudoBean.obj.id}"></p:inputText>
+
+			<p:outputLabel value="Titulo"></p:outputLabel>
+			<p:inputText size="60" maxlength="60"  
+			placeholder="Informe o Título" value="#{conteudoBean.obj.titulo}"></p:inputText>
+
+	        <p:outputLabel value="Texto"></p:outputLabel>
+			<p:textEditor widgetVar="editor1" value="#{conteudoBean.obj.texto}" 
+			              height="150" style="margin-bottom:10px"/>
+	   
+	       
+	       
+
+			<p:outputLabel value="Categoria" for="inputCategoria" />
+			<p:autoComplete id="inputCategoria" size="60" dropdown="true"
+				multiple="false" forceSelection="true" var="obj"
+				itemLabel="#{obj.descricao}" itemValue="#{obj}"
+				value="#{conteudoBean.obj.categoria}" converter="categoriaConverter"
+				completeMethod="#{conteudoBean.completeCategoria}" />
+
+			<p:outputLabel value="Disciplina" for="inputDisciplina" />
+			<p:autoComplete id="inputDisciplina" size="60" dropdown="true"
+				multiple="false" forceSelection="true" var="obj"
+				itemLabel="#{obj.descricao}" itemValue="#{obj}"
+				value="#{conteudoBean.obj.disciplina}" converter="disciplinaConverter"
+				completeMethod="#{conteudoBean.completeDisciplina}" />
+
+
+			<p:commandButton ajax="false" value="Guardar" icon="ui-icon-disk"
+				action="#{conteudoBean.atualizar()}"></p:commandButton>
+			<p:commandButton ajax="false" value="Cancelar" icon="ui-icon-cancel"
+				immediate="true" action="#{conteudoBean.cancelar()}"></p:commandButton>
+				
+	
+				
+
+		</p:panelGrid>
+	</h:form>
+
+
+
+
+</h:body>
+</html>

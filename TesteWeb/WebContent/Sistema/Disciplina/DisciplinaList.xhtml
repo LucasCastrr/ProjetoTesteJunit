@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body onload="#{disciplinaBean.carregarLista()}">
+	<h:form id="form">
+	    <p:growl showDetail="true"></p:growl>
+		<p:commandButton value="Incluir Disciplina" action="#{disciplinaBean.incluir()}"
+		   icon="ui-icon-plus" ajax="false"></p:commandButton>
+			
+		<p:commandButton id="alterar" value="Alterar Disciplina" action="#{disciplinaBean.alterar()}"
+		   disabled="#{disciplinaBean.obj==null}"
+		   icon="ui-icon-pencil" ajax="false"></p:commandButton>
+			
+		<p:commandButton id="excluir" value="Excluir Disciplina" action="#{disciplinaBean.excluir()}"
+		   icon="ui-icon-trash"	ajax="false"
+		   disabled="#{disciplinaBean.obj==null}"
+		   onclick="return confirm('Confirma exclusão?');"
+		   ></p:commandButton>			
+
+		<p:dataTable value="#{disciplinaBean.lista}" var="p"
+		    selectionMode="single" selection="#{disciplinaBean.obj}" rowKey="#{p.id}"
+		    rows="10" paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15"
+            emptyMessage="Nenhum objeto encontrado!"
+            currentPageReportTemplate="Listando de {startRecord} até {endRecord} de {totalRecords}"
+		>
+		    <p:ajax event="rowSelect" update=":form:excluir :form:alterar"/>
+			<p:column headerText="Código" sortBy="#{p.id}"
+			    filterBy="#{p.id}" filterMatchMode="exact">
+				<h:outputText value="#{p.id}"></h:outputText>
+			</p:column>
+			<p:column headerText="Descricoa" sortBy="#{p.nome}"
+			    filterBy="#{p.descricao}" filterMatchMode="contains">
+				<h:outputText value="#{p.descricao}"></h:outputText>
+			</p:column>
+	
+		</p:dataTable>
+
+
+	</h:form>
+</h:body>
+</html>

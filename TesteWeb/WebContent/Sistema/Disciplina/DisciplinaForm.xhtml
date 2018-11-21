@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<h:form>
+	    <p:growl></p:growl>
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Id"></p:outputLabel>
+			<p:inputText  placeholder="Informe ID" 
+			             value="#{disciplinaBean.obj.id}"></p:inputText>
+
+			<p:outputLabel value="Descricão"></p:outputLabel>
+			<p:inputText  placeholder="Informe a Descricão" value="#{disciplinaBean.obj.descricao}"></p:inputText>
+			
+
+			<p:commandButton ajax="false" value="Guardar" icon="ui-icon-disk"
+				action="#{disciplinaBean.gravar()}"></p:commandButton>
+			<p:commandButton ajax="false" value="Cancelar" icon="ui-icon-cancel" 
+			    immediate="true"
+				action="#{disciplinaBean.cancelar()}"></p:commandButton>
+
+		</p:panelGrid>
+	</h:form>
+
+</h:body>
+</html>
