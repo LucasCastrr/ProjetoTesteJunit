@@ -290,6 +290,7 @@ public class CasosDeTeste  {
 	 /*CT-003 Verificar se a funcionalidade de excluir  disciplina esta funcionando
      * 
      */
+	
     @Test
 	public void testeExcluirDisciplina() throws Exception {
     	EntityManager em = factory.createEntityManager();
